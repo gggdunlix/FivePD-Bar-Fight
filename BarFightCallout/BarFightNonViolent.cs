@@ -11,7 +11,7 @@ using CitizenFX.Core.Native;
 
 namespace BarFightNonViolent
 {
-    [CalloutProperties("Bar Fight (Non-Violent)", "GGGDunlix", "0.2.0")]
+    [CalloutProperties("Bar Fight (Non-Violent)", "GGGDunlix", "0.2.1")]
     public class BarFightNV : Callout
     {
         Ped suspect, suspect2;
@@ -42,17 +42,19 @@ namespace BarFightNonViolent
         {
             InitBlip();
             UpdateData();
+            
+        }
+
+        public async override void OnStart(Ped player)
+        {
+            base.OnStart(player);
             suspect = await SpawnPed(RandomUtils.GetRandomPed(), Location);
             suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location);
             suspect.AlwaysKeepTask = true;
             suspect.BlockPermanentEvents = true;
             suspect2.AlwaysKeepTask = true;
             suspect2.BlockPermanentEvents = true;
-        }
 
-        public override void OnStart(Ped player)
-        {
-            base.OnStart(player);
             suspect.Task.FightAgainst(suspect2);
             suspect2.Task.FightAgainst(suspect);
             suspect.AttachBlip();
