@@ -55,9 +55,18 @@ namespace BarFightViolent
             suspect.BlockPermanentEvents = true;
             suspect2.AlwaysKeepTask = true;
             suspect2.BlockPermanentEvents = true;
+            
+            List<WeaponHash> weapons = new List<WeaponHash>() {
+                WeaponHash.Knife,
+                WeaponHash.Bottle,
+                WeaponHash.Bat,
+                WeaponHash.Switchblade,
+                WeaponHash.Knuckle
+            
+            }
 
-            suspect.Weapons.Give(WeaponHash.Bottle, 1, true, true);
-            suspect2.Weapons.Give(WeaponHash.Bottle, 1, true, true);
+            suspect.Weapons.Give(weapons.SelectRandom(), 1, true, true);
+            suspect2.Weapons.Give(weapons.SelectRandom(), 1, true, true);
             suspect.Task.FightAgainst(suspect2);
             suspect2.Task.FightAgainst(suspect);
             suspect.AttachBlip();
